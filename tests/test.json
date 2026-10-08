@@ -1,0 +1,51 @@
+{
+  "kind": "OperatorUnitTest",
+  "name": "scatter_matrix_three_populations",
+  "namespace": "ds0",
+  "inputDataUri": "scatter_input.csv",
+  "outputDataUri": [
+    "table1.csv",
+    "table2.csv"
+  ],
+  "columns": [
+    "cell_id",
+    "pop"
+  ],
+  "rows": [
+    "marker"
+  ],
+  "colors": [],
+  "labels": [],
+  "yAxis": "value",
+  "xAxis": "",
+  "generatedOn": "10/09/2026 01:00:00 AM 2026",
+  "version": "",
+  "propertyValues": [
+    {
+      "kind": "PropertyValue",
+      "name": "panel_factor",
+      "value": "pop"
+    },
+    {
+      "kind": "PropertyValue",
+      "name": "markers",
+      "value": "CD3,CD4,CD8,CD19"
+    },
+    {
+      "kind": "PropertyValue",
+      "name": "max_cells",
+      "value": "30"
+    },
+    {
+      "kind": "PropertyValue",
+      "name": "max_cells_per_panel",
+      "value": "10"
+    },
+    {
+      "kind": "PropertyValue",
+      "name": "seed",
+      "value": "42"
+    }
+  ],
+  "absTol": 1e-06
+}

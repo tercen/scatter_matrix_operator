@@ -1,0 +1,154 @@
+{
+  "name": "Scatter matrix",
+  "description": "Bivariate scatter-matrix rows for a Plot step: for every population (a column factor) and every pair of markers on rows, a seeded draw of all cells plus the population's own cells, labelled 'all cells' / 'this population'. One Plot per population (filter on panel) then shows it over all cells, the way bivariate plots are paged through to check a clustering.",
+  "tags": [
+    "cytometry",
+    "visualisation",
+    "scatter matrix",
+    "quality control"
+  ],
+  "authors": [
+    "tercen"
+  ],
+  "urls": [
+    "https://github.com/tercen/scatter_matrix_operator"
+  ],
+  "communicationProtocol": "grpc",
+  "container": "ghcr.io/tercen/scatter_matrix_operator:0.1.0",
+  "properties": [
+    {
+      "kind": "StringProperty",
+      "name": "panel_factor",
+      "defaultValue": "",
+      "description": "Column factor naming each cell's population; one panel per value. Empty draws a single panel of all cells."
+    },
+    {
+      "kind": "StringProperty",
+      "name": "markers",
+      "defaultValue": "",
+      "description": "Comma-separated row labels, in panel order (x before y). Empty uses every row in the crosstab's order."
+    },
+    {
+      "kind": "DoubleProperty",
+      "name": "max_cells",
+      "defaultValue": 5000,
+      "description": "Background cells drawn (seeded) from the whole projection."
+    },
+    {
+      "kind": "DoubleProperty",
+      "name": "max_cells_per_panel",
+      "defaultValue": 5000,
+      "description": "Cells drawn (seeded) from each population, so small populations are drawn as densely as large ones."
+    },
+    {
+      "kind": "DoubleProperty",
+      "name": "seed",
+      "defaultValue": 42,
+      "description": "Seed for both draws; non-negative."
+    }
+  ],
+  "operatorSpec": {
+    "kind": "OperatorSpec",
+    "ontologyUri": "https://tercen.com/_ontology/tercen",
+    "ontologyVersion": "0.0.1",
+    "inputSpecs": [
+      {
+        "kind": "CrosstabSpec",
+        "metaFactors": [
+          {
+            "kind": "MetaFactor",
+            "name": "Variable",
+            "type": "",
+            "description": "Marker names (one row per marker).",
+            "ontologyMapping": "variable",
+            "crosstabMapping": "row",
+            "cardinality": "1",
+            "factors": []
+          },
+          {
+            "kind": "MetaFactor",
+            "name": "Observation",
+            "type": "",
+            "description": "Cells, with the population factor among the column factors.",
+            "ontologyMapping": "observation",
+            "crosstabMapping": "column",
+            "cardinality": "0..n",
+            "factors": []
+          }
+        ],
+        "axis": [
+          {
+            "kind": "AxisSpec",
+            "metaFactors": [
+              {
+                "kind": "MetaFactor",
+                "name": "Measurement",
+                "type": "double",
+                "description": "Marker value (arcsinh / normalised).",
+                "ontologyMapping": "measurement",
+                "crosstabMapping": "y",
+                "cardinality": "1",
+                "factors": []
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "outputSpecsV2": [
+      {
+        "kind": "OperatorJoinSpec",
+        "joinOperators": [
+          {
+            "kind": "JoinOperator",
+            "joinType": "left",
+            "leftPair": {
+              "kind": "ColumnPair",
+              "lColumns": [
+                "Observation"
+              ],
+              "rColumns": [
+                "Observation"
+              ]
+            },
+            "rightRelation": {
+              "kind": "TableRelation",
+              "attributes": [
+                {
+                  "kind": "Attribute",
+                  "name": "panel",
+                  "type": "string"
+                },
+                {
+                  "kind": "Attribute",
+                  "name": "x_marker",
+                  "type": "string"
+                },
+                {
+                  "kind": "Attribute",
+                  "name": "y_marker",
+                  "type": "string"
+                },
+                {
+                  "kind": "Attribute",
+                  "name": "x",
+                  "type": "double"
+                },
+                {
+                  "kind": "Attribute",
+                  "name": "y",
+                  "type": "double"
+                },
+                {
+                  "kind": "Attribute",
+                  "name": "set",
+                  "type": "string"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

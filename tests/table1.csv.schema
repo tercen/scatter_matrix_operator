@@ -1,0 +1,40 @@
+{
+  "kind": "TableSchema",
+  "columns": [
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.panel",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.x_marker",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.y_marker",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.x",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.y",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "ds0.set",
+      "type": "string"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": ".ci",
+      "type": "int32"
+    }
+  ]
+}

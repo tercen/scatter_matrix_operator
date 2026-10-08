@@ -1,0 +1,15 @@
+{
+  "kind": "TableSchema",
+  "columns": [
+    {
+      "kind": "ColumnSchema",
+      "name": "cell_id",
+      "type": "double"
+    },
+    {
+      "kind": "ColumnSchema",
+      "name": "pop",
+      "type": "string"
+    }
+  ]
+}
